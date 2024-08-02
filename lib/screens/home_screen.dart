@@ -84,40 +84,85 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SizedBox(height: 20), // Tambahkan jarak antara Biodata dan GestureDetector
-            GestureDetector(
-              onTap: () async {
-                final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-                setState(() {
-                  _imageFile = pickedFile;
-                });
-              },
-              child: Container(
-                width: 250,
-                height: 250,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.green, // Warna outline
-                    width: 4.0, // Ketebalan outline
+            Container(
+              width: 300,
+              height: 250,
+              child: Stack(
+                alignment: AlignmentDirectional.center,
+                children: [
+                  Container(
+                    width: 250,
+                    height: 250,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.green, // Warna outline
+                        width: 4.0, // Ketebalan outline
+                      ),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: _imageFile == null
+                            ? AssetImage('assets/images/fotoprofil.jpg') // Default image
+                            : FileImage(File(_imageFile!.path)) as ImageProvider,
+                      ),
+                    ),
                   ),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: _imageFile == null
-                        ? AssetImage('assets/default_avatar.png') // Default image
-                        : FileImage(File(_imageFile!.path)) as ImageProvider,
-                  ),
-                ),
-                child: _imageFile == null
-                    ? Center(
-                  child: Icon(
-                    Icons.camera_alt,
-                    size: 50,
-                    color: Colors.white,
-                  ),
-                )
-                    : null,
+                  Positioned(
+                    right: 30,
+                    bottom: 30,
+                    child: GestureDetector(
+                      onTap: () async {
+                        final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+                        setState(() {
+                          _imageFile = pickedFile;
+                        });
+                      },
+                      child: CircleAvatar(
+                        child: Icon(
+                          Icons.camera_alt,
+                          size: 20,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
+            // GestureDetector(
+            //   onTap: () async {
+            //     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+            //     setState(() {
+            //       _imageFile = pickedFile;
+            //     });
+            //   },
+            //   child: Container(
+            //     width: 250,
+            //     height: 250,
+            //     decoration: BoxDecoration(
+            //       shape: BoxShape.circle,
+            //       border: Border.all(
+            //         color: Colors.green, // Warna outline
+            //         width: 4.0, // Ketebalan outline
+            //       ),
+            //       image: DecorationImage(
+            //         fit: BoxFit.cover,
+            //         image: _imageFile == null
+            //             ? AssetImage('assets/images/fotoprofil.jpg') // Default image
+            //             : FileImage(File(_imageFile!.path)) as ImageProvider,
+            //       ),
+            //     ),
+            //     child: _imageFile == null
+            //         ? Center(
+            //       child: Icon(
+            //         Icons.camera_alt,
+            //         size: 50,
+            //         color: Colors.white,
+            //       ),
+            //     )
+            //         : null,
+            //   ),
+            // ),
             Text(
               'Ricky Ageng Saputra',
               style: TextStyle(

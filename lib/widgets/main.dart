@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:presensismk/screens/home_screen.dart';
 import 'package:presensismk/screens/login_screen.dart';
 import 'package:presensismk/screens/httptest2.dart';
+import 'package:presensismk/screens/rekap_absensi.dart';
 import 'package:presensismk/screens/screens.dart';
 
 void main() {
